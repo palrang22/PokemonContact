@@ -11,19 +11,20 @@ class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setDetailViewController()
+        setNavigationBar()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setDetailViewController() {
+        view.backgroundColor = .white
     }
-    */
-
+    
+    private func setNavigationBar() {
+        self.navigationItem.title = "연락처 추가"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "적용", style: .done, target: self, action: #selector(doneButtonTapped))
+    }
+    
+    @objc private func doneButtonTapped() {
+        
+    }
 }
