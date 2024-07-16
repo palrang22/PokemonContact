@@ -16,6 +16,7 @@
 		E7FB06F42C452EEB0000B6DE /* ContactTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FB06F32C452EEA0000B6DE /* ContactTableView.swift */; };
 		E7FB06F62C452F050000B6DE /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FB06F52C452F050000B6DE /* ContactTableViewCell.swift */; };
 		E7FB06FA2C45312E0000B6DE /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FB06F92C45312E0000B6DE /* DetailViewController.swift */; };
+		E7FB07002C4678B00000B6DE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E7FB06FF2C4678B00000B6DE /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7FB07002C4678B00000B6DE /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,12 +70,36 @@
 				E7FB06EA2C452D650000B6DE /* LaunchScreen.storyboard */,
 				E7FB06ED2C452D650000B6DE /* Info.plist */,
 				E7FB06E52C452D630000B6DE /* PokemonContact.xcdatamodeld */,
-				E7FB06E02C452D630000B6DE /* ViewController.swift */,
-				E7FB06F32C452EEA0000B6DE /* ContactTableView.swift */,
-				E7FB06F52C452F050000B6DE /* ContactTableViewCell.swift */,
-				E7FB06F92C45312E0000B6DE /* DetailViewController.swift */,
+				E7FB06FB2C46698C0000B6DE /* Models */,
+				E7FB06FC2C4669920000B6DE /* Views */,
+				E7FB06FD2C46699B0000B6DE /* Controllers */,
 			);
 			path = PokemonContact;
+			sourceTree = "<group>";
+		};
+		E7FB06FB2C46698C0000B6DE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E7FB06FC2C4669920000B6DE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E7FB06F32C452EEA0000B6DE /* ContactTableView.swift */,
+				E7FB06F52C452F050000B6DE /* ContactTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E7FB06FD2C46699B0000B6DE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E7FB06E02C452D630000B6DE /* ViewController.swift */,
+				E7FB06F92C45312E0000B6DE /* DetailViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -92,6 +118,9 @@
 			dependencies = (
 			);
 			name = PokemonContact;
+			packageProductDependencies = (
+				E7FB06FF2C4678B00000B6DE /* SnapKit */,
+			);
 			productName = PokemonContact;
 			productReference = E7FB06D92C452D630000B6DE /* PokemonContact.app */;
 			productType = "com.apple.product-type.application";
@@ -120,6 +149,9 @@
 				Base,
 			);
 			mainGroup = E7FB06D02C452D630000B6DE;
+			packageReferences = (
+				E7FB06FE2C4678B00000B6DE /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = E7FB06DA2C452D630000B6DE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -371,6 +403,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E7FB06FE2C4678B00000B6DE /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E7FB06FF2C4678B00000B6DE /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E7FB06FE2C4678B00000B6DE /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		E7FB06E52C452D630000B6DE /* PokemonContact.xcdatamodeld */ = {
