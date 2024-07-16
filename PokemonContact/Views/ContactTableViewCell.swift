@@ -61,5 +61,4 @@ class ContactTableViewCell: UITableViewCell {
             $0.trailing.equalToSuperview().offset(-20)
         }
     }
-    
 }
