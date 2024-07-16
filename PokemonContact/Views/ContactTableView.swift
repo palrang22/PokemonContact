@@ -12,8 +12,6 @@ class ContactTableView: UIView {
     private var tableView : UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .white
-        tableView.layer.borderWidth = 1
-        tableView.layer.borderColor = UIColor.gray.cgColor
         tableView.register(ContactTableViewCell.self, forCellReuseIdentifier: "cell")
         return tableView
     }()

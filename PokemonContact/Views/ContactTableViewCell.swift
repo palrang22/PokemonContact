@@ -12,34 +12,33 @@ class ContactTableViewCell: UITableViewCell {
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.backgroundColor = .lightGray
         imageView.layer.borderWidth = 1
         imageView.layer.borderColor = UIColor.gray.cgColor
-        imageView.layer.cornerRadius = 20
-        
-        imageView.snp.makeConstraints {
-            $0.height.equalTo(40)
-            $0.width.equalTo(40)
-        }
+        imageView.layer.cornerRadius = 30
         return imageView
     }()
     
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.font = .systemFont(ofSize: 12)
+        label.font = .systemFont(ofSize: 16)
+        label.text = "리자몽"
         return label
     }()
     
     private let phoneNumLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.font = .systemFont(ofSize: 12)
+        label.font = .systemFont(ofSize: 16)
+        label.text = "010-1111-2222"
         return label
     }()
     
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: "cell")
+        setupTableViewCell()
     }
     
     required init?(coder: NSCoder) {
@@ -49,12 +48,13 @@ class ContactTableViewCell: UITableViewCell {
     func setupTableViewCell() {
         [profileImageView, nameLabel, phoneNumLabel].forEach{ addSubview($0) }
         profileImageView.snp.makeConstraints {
+            $0.height.width.equalTo(60)
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(20)
         }
         nameLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalTo(phoneNumLabel.snp.leading).offset(-20)
+            $0.trailing.equalTo(phoneNumLabel.snp.leading).offset(-40)
         }
         phoneNumLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()

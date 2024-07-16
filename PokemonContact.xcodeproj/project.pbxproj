@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E70E28F72C46B13E00002D3F /* PokemonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70E28F62C46B13E00002D3F /* PokemonModel.swift */; };
 		E7FB06DD2C452D630000B6DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FB06DC2C452D630000B6DE /* AppDelegate.swift */; };
 		E7FB06DF2C452D630000B6DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FB06DE2C452D630000B6DE /* SceneDelegate.swift */; };
 		E7FB06E12C452D630000B6DE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FB06E02C452D630000B6DE /* ViewController.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E70E28F62C46B13E00002D3F /* PokemonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonModel.swift; sourceTree = "<group>"; };
 		E7FB06D92C452D630000B6DE /* PokemonContact.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokemonContact.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7FB06DC2C452D630000B6DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7FB06DE2C452D630000B6DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 		E7FB06FB2C46698C0000B6DE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E70E28F62C46B13E00002D3F /* PokemonModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 				E7FB06DD2C452D630000B6DE /* AppDelegate.swift in Sources */,
 				E7FB06DF2C452D630000B6DE /* SceneDelegate.swift in Sources */,
 				E7FB06FA2C45312E0000B6DE /* DetailViewController.swift in Sources */,
+				E70E28F72C46B13E00002D3F /* PokemonModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
