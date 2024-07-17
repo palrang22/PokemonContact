@@ -7,14 +7,15 @@
 
 import UIKit
 import SnapKit
+import Alamofire
 
 class DetailViewController: UIViewController {
     
-    private let profileImage: UIImageView = {
+    private var profileImage: UIImageView = {
         let image = UIImageView()
-        image.backgroundColor = .gray
+        image.backgroundColor = .white
         image.layer.borderWidth = 1
-        image.layer.borderColor = UIColor.black.cgColor
+        image.layer.borderColor = UIColor.lightGray.cgColor
         image.layer.cornerRadius = 100
         return image
     }()
@@ -53,6 +54,36 @@ class DetailViewController: UIViewController {
     
     @objc private func randomButtonTapped() {
         print("randombuttontapped")
+        fetchPokemonData()
+    }
+    
+    private func fetchPokemonData() {
+        let randomId = Int.random(in: 1...1025)
+        let imgUrl = "https://pokeapi.co/api/v2/pokemon/\(randomId)"
+        guard let url = URL(string: imgUrl) else {
+            print("URL 오류")
+            return
+        }
+        
+        fetchData(url: url) { [weak self] (result: Result<PokemonModel, AFError>) in
+            guard let self else { return }
+            switch result {
+            case .success(let pokemon):
+                guard let imgUrl = URL(string: pokemon.sprites.frontDefault) else {
+                    print("이미지 url 오류")
+                    return
+                }
+                AF.request(imgUrl).responseData { response in
+                    if let data = response.data, let image = UIImage(data: data) {
+                        DispatchQueue.main.async {
+                            self.profileImage.image = image
+                        }
+                    }
+                }
+            case .failure(let error):
+                print("데이터 로딩 실패")
+            }
+        }
     }
     
     private func setDetailViewController() {
