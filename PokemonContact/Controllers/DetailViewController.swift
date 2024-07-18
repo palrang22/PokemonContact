@@ -122,8 +122,8 @@ class DetailViewController: UIViewController {
             guard let self else { return }
             switch result {
             case .success(let pokemon):
-                let imgUrlString = pokemon.sprites.frontDefault
-                loadImage(from: imgUrlString, into: self.profileImage)
+                self.imgUrl = pokemon.sprites.frontDefault
+                loadImage(from: self.imgUrl ?? "", into: self.profileImage)
                 self.nameField.placeholder = pokemon.name
             case .failure(let error):
                 print("데이터 로딩 실패: \(error.localizedDescription)")
