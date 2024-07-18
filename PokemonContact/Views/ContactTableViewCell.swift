@@ -12,7 +12,6 @@ class ContactTableViewCell: UITableViewCell {
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .lightGray
         imageView.layer.borderWidth = 1
         imageView.layer.borderColor = UIColor.gray.cgColor
         imageView.layer.cornerRadius = 30
@@ -43,6 +42,13 @@ class ContactTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configTableViewCell(_ contact: PokemonContact) {
+        nameLabel.text = contact.name
+        phoneNumLabel.text = contact.num
+        guard let imgURL = contact.img else { return }
+        loadImage(from: imgURL, into: profileImageView)
     }
     
     func setupTableViewCell() {
