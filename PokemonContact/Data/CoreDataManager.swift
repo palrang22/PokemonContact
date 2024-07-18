@@ -43,6 +43,8 @@ class CoreDataManager {
     // Read
     func readData() -> [PokemonContact] {
         let fetchRequest: NSFetchRequest<PokemonContact> = PokemonContact.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key:"name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
         do {
             let contacts = try self.container.viewContext.fetch(fetchRequest)
             return contacts
