@@ -34,6 +34,7 @@ class DetailViewController: UIViewController {
         image.layer.borderWidth = 1
         image.layer.borderColor = UIColor.lightGray.cgColor
         image.layer.cornerRadius = 100
+        image.clipsToBounds = true
         return image
     }()
     
@@ -56,6 +57,7 @@ class DetailViewController: UIViewController {
         let textfield = UITextField()
         textfield.placeholder = "전화번호"
         textfield.borderStyle = .roundedRect
+        textfield.keyboardType = .numberPad
         return textfield
     }()
     
@@ -63,6 +65,7 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         setDetailViewController()
         setNavigationBar()
+        textfieldDelegate()
         
         switch mode {
         case .add:
@@ -89,28 +92,25 @@ class DetailViewController: UIViewController {
     }
     
     private func savePokemonData() {
+        guard let phoneNumber = contactField.text, !phoneNumber.isEmpty, phoneNumber != contactField.placeholder else {
+            showAlert(message: "전화번호를 입력하세요!", on: self)
+            return
+        }
+        let name = (nameField.text?.isEmpty ?? true) ? nameField.placeholder : nameField.text
+        guard let imageURL = self.imgUrl else {
+            showAlert(message: "랜덤 이미지 생성 버튼을 눌러 프로필사진을 넣어보세요!", on: self)
+            return
+        }
+        
         switch mode {
         case .add:
-            guard let name = nameField.text,
-                  let phoneNumber = contactField.text,
-                  let imageURL = self.imgUrl else {
-                print("입력값 오류")
-                return
-            }
-            CoreDataManager.shared.createData(name: name, num: phoneNumber, img: imageURL)
-            
+            CoreDataManager.shared.createData(name: name!, num: phoneNumber, img: imageURL)
         case .update(let contact):
-            guard let name = nameField.text, !name.isEmpty,
-                  let phoneNumber = contactField.text, !phoneNumber.isEmpty,
-                  let imageURL = self.imgUrl else {
-                print("입력값 오류")
-                return
-            }
-            CoreDataManager.shared.updateData(currentName: contact.name ?? "", updateName: name, updateNum: phoneNumber, updateImg: imageURL)
+            CoreDataManager.shared.updateData(currentName: contact.name ?? "", updateName: name!, updateNum: phoneNumber, updateImg: imageURL)
         }
         self.navigationController?.popViewController(animated: true)
     }
-    
+
     private func fetchPokemonData() {
         let randomId = Int.random(in: 1...1025)
         let apiUrl = "https://pokeapi.co/api/v2/pokemon/\(randomId)"
@@ -123,12 +123,8 @@ class DetailViewController: UIViewController {
             switch result {
             case .success(let pokemon):
                 let imgUrlString = pokemon.sprites.frontDefault
-                guard let imgUrl = URL(string: imgUrlString) else {
-                    print("URL 오류 2")
-                    return
-                }
-                self.imgUrl = imgUrlString
                 loadImage(from: imgUrlString, into: self.profileImage)
+                self.nameField.placeholder = pokemon.name
             case .failure(let error):
                 print("데이터 로딩 실패: \(error.localizedDescription)")
             }
@@ -163,5 +159,23 @@ class DetailViewController: UIViewController {
     private func setNavigationBar() {
         self.navigationItem.title = "연락처 추가"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "적용", style: .done, target: self, action: #selector(doneButtonTapped))
+    }
+
+}
+
+
+extension DetailViewController: UITextFieldDelegate {
+    func textfieldDelegate() {
+        nameField.delegate = self
+        contactField.delegate = self
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == contactField {
+            let allowedCharacters = CharacterSet.decimalDigits
+            let characterSet = CharacterSet(charactersIn: string)
+            return allowedCharacters.isSuperset(of: characterSet)
+        }
+        return true
     }
 }

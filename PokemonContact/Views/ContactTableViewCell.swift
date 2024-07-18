@@ -61,7 +61,7 @@ class ContactTableViewCell: UITableViewCell {
         }
         nameLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalTo(phoneNumLabel.snp.leading).offset(-40)
+            $0.leading.equalTo(profileImageView.snp.trailing).offset(40)
         }
         phoneNumLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
