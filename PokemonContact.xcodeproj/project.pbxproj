@@ -14,6 +14,7 @@
 		E75511462C47939600F981F5 /* PokemonContact+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75511442C47939600F981F5 /* PokemonContact+CoreDataClass.swift */; };
 		E75511472C47939600F981F5 /* PokemonContact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75511452C47939600F981F5 /* PokemonContact+CoreDataProperties.swift */; };
 		E755114A2C47959800F981F5 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75511492C47959800F981F5 /* CoreDataManager.swift */; };
+		E78AB98C2C49215F00298D7D /* showAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78AB98B2C49215F00298D7D /* showAlert.swift */; };
 		E7FB06DD2C452D630000B6DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FB06DC2C452D630000B6DE /* AppDelegate.swift */; };
 		E7FB06DF2C452D630000B6DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FB06DE2C452D630000B6DE /* SceneDelegate.swift */; };
 		E7FB06E12C452D630000B6DE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FB06E02C452D630000B6DE /* ViewController.swift */; };
@@ -33,6 +34,7 @@
 		E75511442C47939600F981F5 /* PokemonContact+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PokemonContact+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E75511452C47939600F981F5 /* PokemonContact+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PokemonContact+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E75511492C47959800F981F5 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		E78AB98B2C49215F00298D7D /* showAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = showAlert.swift; sourceTree = "<group>"; };
 		E7FB06D92C452D630000B6DE /* PokemonContact.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokemonContact.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7FB06DC2C452D630000B6DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7FB06DE2C452D630000B6DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 			children = (
 				E75511422C47788100F981F5 /* NetworkManager.swift */,
 				E70E473E2C490957000B163B /* loadImage.swift */,
+				E78AB98B2C49215F00298D7D /* showAlert.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				E7FB06F62C452F050000B6DE /* ContactTableViewCell.swift in Sources */,
 				E755114A2C47959800F981F5 /* CoreDataManager.swift in Sources */,
 				E7FB06E72C452D630000B6DE /* PokemonContact.xcdatamodeld in Sources */,
+				E78AB98C2C49215F00298D7D /* showAlert.swift in Sources */,
 				E75511462C47939600F981F5 /* PokemonContact+CoreDataClass.swift in Sources */,
 				E75511472C47939600F981F5 /* PokemonContact+CoreDataProperties.swift in Sources */,
 				E7FB06E12C452D630000B6DE /* ViewController.swift in Sources */,
