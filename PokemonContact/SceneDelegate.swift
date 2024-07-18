@@ -18,6 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = navigationVC
         window.makeKeyAndVisible()
         self.window = window
+        
+        CoreDataManager.shared
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     
     private lazy var addButton: UIButton = {
         let button = UIButton(primaryAction: UIAction(handler: { _ in
-            self.navigationController?.pushViewController(DetailViewController(), animated: true)
+            self.navigationController?.pushViewController(DetailViewController(mode: .add), animated: true)
         }))
         button.setTitle("추가", for: .normal)
         button.setTitleColor(.blue, for: .normal)
@@ -32,6 +32,18 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupMainPage()
+        contactTableView.delegate = self
+        loadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        loadData()
+    }
+    
+    private func loadData() {
+        let contacts = CoreDataManager.shared.readData()
+        contactTableView.contacts = contacts
     }
     
     private func setupMainPage() {
@@ -50,5 +62,12 @@ class ViewController: UIViewController {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
+    }
+}
+
+extension ViewController: ContactTableViewDelegate {
+    func didSelectContact(_ contact: PokemonContact) {
+        let detailVC = DetailViewController(mode: .update(contact))
+        self.navigationController?.pushViewController(detailVC, animated: true)
     }
 }

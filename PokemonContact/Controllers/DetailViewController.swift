@@ -11,6 +11,23 @@ import Alamofire
 
 class DetailViewController: UIViewController {
     
+    enum Mode {
+        case add
+        case update(PokemonContact)
+    }
+    
+    private var mode: Mode
+    private var imgUrl: String?
+    
+    init(mode: Mode) {
+        self.mode = mode
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private var profileImage: UIImageView = {
         let image = UIImageView()
         image.backgroundColor = .white
@@ -46,10 +63,24 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         setDetailViewController()
         setNavigationBar()
+        
+        switch mode {
+        case .add:
+            self.navigationItem.title = "연락처 추가"
+        case .update(let contact):
+            self.navigationItem.title = contact.name
+            nameField.text = contact.name
+            contactField.text = contact.num
+            if let imgString = contact.img {
+                self.imgUrl = imgString
+                loadImage(from: imgString, into: profileImage)
+            }
+        }
     }
     
     @objc private func doneButtonTapped() {
         print("donebuttontapped")
+        savePokemonData()
     }
     
     @objc private func randomButtonTapped() {
@@ -57,31 +88,49 @@ class DetailViewController: UIViewController {
         fetchPokemonData()
     }
     
+    private func savePokemonData() {
+        switch mode {
+        case .add:
+            guard let name = nameField.text,
+                  let phoneNumber = contactField.text,
+                  let imageURL = self.imgUrl else {
+                print("입력값 오류")
+                return
+            }
+            CoreDataManager.shared.createData(name: name, num: phoneNumber, img: imageURL)
+            
+        case .update(let contact):
+            guard let name = nameField.text, !name.isEmpty,
+                  let phoneNumber = contactField.text, !phoneNumber.isEmpty,
+                  let imageURL = self.imgUrl else {
+                print("입력값 오류")
+                return
+            }
+            CoreDataManager.shared.updateData(currentName: contact.name ?? "", updateName: name, updateNum: phoneNumber, updateImg: imageURL)
+        }
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     private func fetchPokemonData() {
         let randomId = Int.random(in: 1...1025)
-        let imgUrl = "https://pokeapi.co/api/v2/pokemon/\(randomId)"
-        guard let url = URL(string: imgUrl) else {
-            print("URL 오류")
+        let apiUrl = "https://pokeapi.co/api/v2/pokemon/\(randomId)"
+        guard let url = URL(string: apiUrl) else {
+            print("URL 오류 1")
             return
         }
-        
         fetchData(url: url) { [weak self] (result: Result<PokemonModel, AFError>) in
             guard let self else { return }
             switch result {
             case .success(let pokemon):
-                guard let imgUrl = URL(string: pokemon.sprites.frontDefault) else {
-                    print("이미지 url 오류")
+                let imgUrlString = pokemon.sprites.frontDefault
+                guard let imgUrl = URL(string: imgUrlString) else {
+                    print("URL 오류 2")
                     return
                 }
-                AF.request(imgUrl).responseData { response in
-                    if let data = response.data, let image = UIImage(data: data) {
-                        DispatchQueue.main.async {
-                            self.profileImage.image = image
-                        }
-                    }
-                }
+                self.imgUrl = imgUrlString
+                loadImage(from: imgUrlString, into: self.profileImage)
             case .failure(let error):
-                print("데이터 로딩 실패")
+                print("데이터 로딩 실패: \(error.localizedDescription)")
             }
         }
     }

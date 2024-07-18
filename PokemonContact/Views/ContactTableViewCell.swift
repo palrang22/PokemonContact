@@ -45,6 +45,13 @@ class ContactTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func configTableViewCell(_ contact: PokemonContact) {
+        nameLabel.text = contact.name
+        phoneNumLabel.text = contact.num
+        guard let imgURL = contact.img else { return }
+        loadImage(from: imgURL, into: profileImageView)
+    }
+    
     func setupTableViewCell() {
         [profileImageView, nameLabel, phoneNumLabel].forEach{ addSubview($0) }
         profileImageView.snp.makeConstraints {
