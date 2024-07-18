@@ -19,7 +19,6 @@ class ContactTableView: UIView {
     
     private var tableView : UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .gray
         tableView.register(ContactTableViewCell.self, forCellReuseIdentifier: "cell")
         return tableView
     }()
@@ -53,7 +52,7 @@ extension ContactTableView: UITableViewDelegate {
         80
     }
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let contact = contacts[indexPath.row]
         delegate?.didSelectContact(contact)
     }

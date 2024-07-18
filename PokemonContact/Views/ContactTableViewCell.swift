@@ -12,7 +12,6 @@ class ContactTableViewCell: UITableViewCell {
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .lightGray
         imageView.layer.borderWidth = 1
         imageView.layer.borderColor = UIColor.gray.cgColor
         imageView.layer.cornerRadius = 30
