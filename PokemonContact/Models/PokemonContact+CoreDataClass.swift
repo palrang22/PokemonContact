@@ -13,6 +13,7 @@ import CoreData
 public class PokemonContact: NSManagedObject {
     public static let PokemonEntity = "PokemonContact"
     public enum Key {
+        static let id = "id"
         static let name = "name"
         static let num = "num"
         static let img = "img"

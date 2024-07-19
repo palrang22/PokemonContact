@@ -28,6 +28,10 @@ class CoreDataManager {
             return
         }
         let newContact = NSManagedObject(entity: entity, insertInto: self.container.viewContext)
+        
+        let id = UUID()
+        newContact.setValue(id, forKey: "id")
+        
         newContact.setValue(name, forKey: PokemonContact.Key.name)
         newContact.setValue(num, forKey: PokemonContact.Key.num)
         newContact.setValue(img, forKey: PokemonContact.Key.img)
@@ -77,7 +81,7 @@ class CoreDataManager {
     // Delete
     func deleteData(name: String) {
         let fetchRequest = PokemonContact.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "name == %@", name)
+        fetchRequest.predicate = NSPredicate(format: "id == %@", name)
 
         do {
             let result = try self.container.viewContext.fetch(fetchRequest)
