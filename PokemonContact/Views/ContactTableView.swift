@@ -56,6 +56,16 @@ extension ContactTableView: UITableViewDelegate {
         let contact = contacts[indexPath.row]
         delegate?.didSelectContact(contact)
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let contact = contacts[indexPath.row]
+            CoreDataManager.shared.deleteData(id: contact.id!)
+            
+            // 테이블뷰 데이터소스 배열에서 제거 - didSet에서 바로 초기화되기 때문에 테이블뷰 셀 삭제 코드는 따로 안넣어도 됨
+            contacts.remove(at: indexPath.row)
+        }
+    }
 }
 
 extension ContactTableView: UITableViewDataSource {

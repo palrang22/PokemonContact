@@ -28,6 +28,10 @@ class CoreDataManager {
             return
         }
         let newContact = NSManagedObject(entity: entity, insertInto: self.container.viewContext)
+        
+        let id = UUID()
+        newContact.setValue(id, forKey: "id")
+        
         newContact.setValue(name, forKey: PokemonContact.Key.name)
         newContact.setValue(num, forKey: PokemonContact.Key.num)
         newContact.setValue(img, forKey: PokemonContact.Key.img)
@@ -54,10 +58,10 @@ class CoreDataManager {
         }
     }
 
-    // Update
-    func updateData(currentName: String, updateName: String, updateNum: String, updateImg: String) {
+    // Update - id로 필터링되도록 변경
+    func updateData(id: UUID, currentName: String, updateName: String, updateNum: String, updateImg: String) {
         let fetchRequest = PokemonContact.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "name == %@", currentName)
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
         do {
             let result = try self.container.viewContext.fetch(fetchRequest)
 
@@ -74,10 +78,10 @@ class CoreDataManager {
         }
     }
 
-    // Delete
-    func deleteData(name: String) {
+    // Delete - id로 필터링되도록 변경
+    func deleteData(id: UUID) {
         let fetchRequest = PokemonContact.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "name == %@", name)
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
 
         do {
             let result = try self.container.viewContext.fetch(fetchRequest)
@@ -100,6 +104,26 @@ class CoreDataManager {
             }
         } catch {
             print("Failed to fetch data: \(error)")
+        }
+    }
+    
+    // container 초기화 - 필요시 SceneDelegate에서 작동
+    func resetPersistentStore() {
+        let storeCoordinator = container.persistentStoreCoordinator
+        let storeURL = container.persistentStoreDescriptions.first?.url
+        
+        // 기존 저장소 삭제
+        if let storeURL = storeURL {
+            do {
+                try storeCoordinator.destroyPersistentStore(at: storeURL, ofType: NSSQLiteStoreType, options: nil)
+                print("Persistent store destroyed")
+                
+                // 다시 추가
+                try storeCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
+                print("Persistent store re-added")
+            } catch {
+                print("Failed to reset persistent store: \(error)")
+            }
         }
     }
 }

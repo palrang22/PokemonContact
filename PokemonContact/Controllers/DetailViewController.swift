@@ -106,7 +106,7 @@ class DetailViewController: UIViewController {
         case .add:
             CoreDataManager.shared.createData(name: name!, num: phoneNumber, img: imageURL)
         case .update(let contact):
-            CoreDataManager.shared.updateData(currentName: contact.name ?? "", updateName: name!, updateNum: phoneNumber, updateImg: imageURL)
+            CoreDataManager.shared.updateData(id: contact.id!, currentName: contact.name ?? "", updateName: name!, updateNum: phoneNumber, updateImg: imageURL)
         }
         self.navigationController?.popViewController(animated: true)
     }
@@ -122,8 +122,8 @@ class DetailViewController: UIViewController {
             guard let self else { return }
             switch result {
             case .success(let pokemon):
-                let imgUrlString = pokemon.sprites.frontDefault
-                loadImage(from: imgUrlString, into: self.profileImage)
+                self.imgUrl = pokemon.sprites.frontDefault
+                loadImage(from: self.imgUrl ?? "", into: self.profileImage)
                 self.nameField.placeholder = pokemon.name
             case .failure(let error):
                 print("데이터 로딩 실패: \(error.localizedDescription)")
