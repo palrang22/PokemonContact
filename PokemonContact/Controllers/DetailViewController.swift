@@ -106,7 +106,7 @@ class DetailViewController: UIViewController {
         case .add:
             CoreDataManager.shared.createData(name: name!, num: phoneNumber, img: imageURL)
         case .update(let contact):
-            CoreDataManager.shared.updateData(currentName: contact.name ?? "", updateName: name!, updateNum: phoneNumber, updateImg: imageURL)
+            CoreDataManager.shared.updateData(id: contact.id!, currentName: contact.name ?? "", updateName: name!, updateNum: phoneNumber, updateImg: imageURL)
         }
         self.navigationController?.popViewController(animated: true)
     }
