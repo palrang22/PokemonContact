@@ -30,8 +30,7 @@ class CoreDataManager {
         let newContact = NSManagedObject(entity: entity, insertInto: self.container.viewContext)
         
         let id = UUID()
-        newContact.setValue(id, forKey: "id")
-        
+        newContact.setValue(id, forKey: PokemonContact.Key.id)        
         newContact.setValue(name, forKey: PokemonContact.Key.name)
         newContact.setValue(num, forKey: PokemonContact.Key.num)
         newContact.setValue(img, forKey: PokemonContact.Key.img)
